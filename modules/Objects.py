@@ -21,4 +21,5 @@ class Environment:
     def plot_me(self):
         plt.figure()
         plt.contourf(np.transpose(self.agent_ID))
+        plt.show()
         return
