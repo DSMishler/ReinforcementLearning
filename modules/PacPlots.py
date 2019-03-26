@@ -10,9 +10,9 @@ import numpy as np
 
 def plot_all(grid, ghost, pacman, filename):
     fig = plt.figure( figsize = (10,10))
-    cs = plt.countourf(np.transpose(grid.Agent_ID))
+    cs = plt.contourf(np.transpose(grid.agent_ID))
     plt.axis('image')
-    plt.plot(ghost.pos_x, ghost.pos_y, 'wo')
-    plt.plot(pacman.pos_x, pacman.pos_y, 'ro')
+    plt.plot(ghost.pos_x, ghost.pos_y, 'ro')
+    plt.plot(pacman.pos_x, pacman.pos_y, 'yo')
     plt.savefig(filename)
     plt.show()

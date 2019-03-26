@@ -1,8 +1,8 @@
 
 class Ghost:
     def __init__(self, grid):
-        self.pos_x = grid.Agent_ID.shape[0]
-        self.pos_y = grid.Agent_ID.shape[1]
+        self.pos_x = grid.agent_ID.shape[0]-1
+        self.pos_y = grid.agent_ID.shape[1]-1
         self.hidden_variable = False
         self.neighbors = [] #to use later
         self.weights = [] # to use later
