@@ -4,10 +4,18 @@ Created on Tue Mar 19 13:07:35 2019
 
 @author: dsmis
 """
-import Objects
+import Pacman
+import Ghost
+import Environment
+import PacPlots
 
 def startup():
-    grid = Objects.Environment()
+    grid = Environment.Environment()
     grid.plot_me()
+    print("starting grid above")
+    pac = Pacman.Pacman(grid)
+    ghost = Ghost.Ghost(grid)
+    PacPlots.plot_all(grid, ghost, pac, "firstplot")
+    
 
 startup()
