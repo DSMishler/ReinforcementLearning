@@ -17,7 +17,7 @@ def startup():
     ghost = Ghost.Ghost(grid)
     PacPlots.plot_all(grid, ghost, pac, "firstplot")
     ghost.move(5,5,grid)
-    pac.move(4,4,grid)
+    pac.decide(grid)
     PacPlots.plot_all(grid, ghost, pac, "firstplot")
     
 
