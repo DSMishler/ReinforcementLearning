@@ -6,9 +6,15 @@ class Ghost:
         self.hidden_variable = False
         self.neighbors = [] #to use later
         self.weights = [] # to use later
-        self.ID = 9 # to change later
-    def move(self, dest_x, dest_y):
+        self.ID = -1 # to change later
+        grid.agent_ID[self.pos_x, self.pos_y] = self.ID
+        return
+    
+    def move(self, dest_x, dest_y, grid):
+        grid.agent_ID[self.pos_x, self.pos_y] = 0 # clean up where he was
         self.pos_x = dest_x
         self.pos_y = dest_y
+        grid.agent_ID[self.pos_x, self.pos_y] = self.ID # Note where he went
+        return
         
         
