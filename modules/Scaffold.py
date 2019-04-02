@@ -15,10 +15,13 @@ def startup():
     print("starting grid above")
     pac = Pacman.Pacman(grid)
     ghost = Ghost.Ghost(grid)
+    pac.eat(grid)
     PacPlots.plot_all(grid, ghost, pac, "firstplot")
     ghost.move(5,5,grid)
-    pac.decide(grid)
-    PacPlots.plot_all(grid, ghost, pac, "firstplot")
+    for i in range(33):    
+        pac.decide(grid)
+        pac.eat(grid)
+    PacPlots.plot_all(grid, ghost, pac, "endplot")
     
 
 startup()
