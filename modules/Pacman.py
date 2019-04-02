@@ -29,4 +29,13 @@ class Pacman:
                 final_x = pt_x
                 final_y = pt_y
         self.move(final_x, final_y, grid)
+        return
+    
+    def eat(self, grid):
+        if(grid.pellet_ID[self.pos_x][self.pos_y] == 1):
+            grid.pellet_ID[self.pos_x][self.pos_y] = 0
+            print("munch!")
+        else:
+            print("Nothing to eat here!")
+        return
             

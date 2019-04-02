@@ -9,6 +9,7 @@ import matplotlib.pyplot as plt
 from matplotlib.offsetbox import (AnnotationBbox, OffsetImage)
 from matplotlib.cbook import get_sample_data
 import numpy as np
+import Environment
 
 def plot_all(grid, ghost, pacman, filename):
     
@@ -43,5 +44,7 @@ def plot_all(grid, ghost, pacman, filename):
                 plt.plot(i,j,'wo')
     plt.plot(ghost.pos_x, ghost.pos_y, 'ro', markersize = 20)
     plt.plot(pacman.pos_x, pacman.pos_y, 'yo', markersize = 25)
+    plt.xlim(-0.5, Environment.lattice_len-.5)
+    plt.ylim(-0.5, Environment.lattice_height-.5)
     plt.savefig(filename)
     plt.show()
