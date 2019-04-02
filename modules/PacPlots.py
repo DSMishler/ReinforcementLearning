@@ -41,7 +41,7 @@ def plot_all(grid, ghost, pacman, filename):
         for j in range(grid.pellet_ID.shape[1]):
             if grid.pellet_ID[i,j] == 1:
                 plt.plot(i,j,'wo')
-    plt.plot(ghost.pos_x, ghost.pos_y, 'ro')
-    plt.plot(pacman.pos_x, pacman.pos_y, 'yo')
+    plt.plot(ghost.pos_x, ghost.pos_y, 'ro', markersize = 20)
+    plt.plot(pacman.pos_x, pacman.pos_y, 'yo', markersize = 25)
     plt.savefig(filename)
     plt.show()
