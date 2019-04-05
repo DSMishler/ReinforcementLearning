@@ -35,8 +35,8 @@ def plot_all(grid, ghost, pacman, filename):
                          )
     ax.add_artist(box)
     '''
-    fig = plt.figure( figsize = (10,10))
-    cs = plt.contourf(np.transpose(grid.agent_ID))
+    plt.figure( figsize = (10,10))
+    plt.contourf(np.transpose(grid.agent_ID))
     plt.axis('image')
     for i in range(grid.pellet_ID.shape[0]):
         for j in range(grid.pellet_ID.shape[1]):
