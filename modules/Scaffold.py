@@ -21,6 +21,7 @@ def startup():
     for i in range(33):    
         pac.decide(grid)
         pac.eat(grid)
+    ghost.chase(grid)
     PacPlots.plot_all(grid, ghost, pac, "endplot")
     
 
