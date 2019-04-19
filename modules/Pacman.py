@@ -38,4 +38,17 @@ class Pacman:
         else:
             print("Nothing to eat here!")
         return
+
+    def findGhost(self,grid):
+        # find where Pacman is at on the grid
+        for i in range(grid.ghost_ID.shape[0]):
+            for j in range(grid.ghost_ID.shape[1]):
+                if grid.ghost_ID[i][j] != 0:
+                    return(i,j)
+    
+    def punishment(self,grid):
+        (ghostI, ghostJ) = self.findGhost(grid)
+        punishment = (((self.pos_x-ghostI)**2)+((self.pos_y-ghostJ)**2))**(1/2)
+        print(punishment)
+        return(punishment)
             
