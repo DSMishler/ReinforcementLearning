@@ -17,6 +17,15 @@ def startup():
     ghost = Ghost.Ghost(grid)
     pac.eat(grid)
     PacPlots.plot_all(grid, ghost, pac, "firstplot")
+    for i in range(20):
+        pac.smartMove(grid)
+        pac.eat(grid)
+        if (int(i/2)*2==i/2 * 2):
+            ghost.chase(grid)
+        plotstr = "pacPlotv2" + str(i)
+        PacPlots.plot_all(grid, ghost, pac, plotstr)
+        
+    '''
     ghost.move(5,5,grid)
     for i in range(33):    
         pac.decide(grid)
@@ -27,6 +36,9 @@ def startup():
     pac.move(6,3,grid)
     pac.reward(grid)
     pac.smartMove(grid)
+    '''
+    
+    
     PacPlots.plot_all(grid, ghost, pac, "endplot")
     
 

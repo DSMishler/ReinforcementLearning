@@ -14,6 +14,7 @@ class Pacman:
         self.pos_y = dest_y
         grid.agent_ID[self.pos_x,self.pos_y] = 1
         return
+    
     def decide(self, grid):
         final_x = self.pos_x
         final_y = self.pos_y
@@ -32,15 +33,15 @@ class Pacman:
         return
     
     def smartMove(self,grid):
-        weights = self.getRewards(grid, 1, 10)
+        weights = self.getRewards(grid, 1, 400)
         greatest_i = 0
         for i in range(len(weights)):
             if(weights[greatest_i]<weights[i]):
                 greatest_i = i
-        final_x = self.pos_x+self.neighbors[i][0]
-        final_y = self.pos_y+self.neighbors[i][1]
+        final_x = self.pos_x+self.neighbors[greatest_i][0]
+        final_y = self.pos_y+self.neighbors[greatest_i][1]
         for i in range(len(weights)):
-            print("my weight at " + str(i) + " is " + str(weights[i]) + "!")
+            print("my weight at " + str(self.neighbors[i]) + " is " + str(weights[i]) + "!")
         self.move(final_x,final_y,grid)
     
     def getRewards(self, grid, alpha, beta):
@@ -48,10 +49,14 @@ class Pacman:
         for i in range(len(self.neighbors)):
             consider_x = self.pos_x+self.neighbors[i][0]
             consider_y = self.pos_y+self.neighbors[i][1]
+            print(consider_x,consider_y)
+
             if(consider_x > grid.agent_ID.shape[0]-1) or (consider_x<0):
+                print("x oob")
                 weights.append(-1000)
                 continue
             if(consider_y > grid.agent_ID.shape[1]-1) or (consider_y<0):
+                print("y oob")
                 weights.append(-1000)
                 continue
             punishmentContrib = self.punishmentAt(grid,consider_x,consider_y)

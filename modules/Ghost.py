@@ -30,6 +30,8 @@ class Ghost:
         (pac_pos_x, pac_pos_y) = self.findPac(grid)
         pac_diff_x = pac_pos_x-self.pos_x
         pac_diff_y = pac_pos_y-self.pos_y
+        if pac_diff_y == 0:
+            pac_diff_y += .01
         moveAngle = np.arctan(pac_diff_x / pac_diff_y)
         if(moveAngle <= -np.pi/4 or moveAngle >= np.pi/4):
             if(pac_diff_x > 0):
