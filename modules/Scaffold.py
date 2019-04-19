@@ -22,6 +22,10 @@ def startup():
         pac.decide(grid)
         pac.eat(grid)
     ghost.chase(grid)
+    pac.punishment(grid)
+    pac.reward(grid)
+    pac.move(6,3,grid)
+    pac.reward(grid)
     PacPlots.plot_all(grid, ghost, pac, "endplot")
     
 

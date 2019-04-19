@@ -51,4 +51,14 @@ class Pacman:
         punishment = (((self.pos_x-ghostI)**2)+((self.pos_y-ghostJ)**2))**(1/2)
         print(punishment)
         return(punishment)
-            
+    
+    def reward(self, grid):
+        reward = 0
+        for i in range(grid.ghost_ID.shape[0]):
+            for j in range(grid.ghost_ID.shape[1]):
+                if (i == self.pos_x) and (j == self.pos_y):
+                    continue
+                if grid.pellet_ID[i][j] == 1:
+                    reward += 1/((((self.pos_x-i)**2)+(self.pos_y-j)**2)**(1/2))
+        print(reward)
+        return(reward)
