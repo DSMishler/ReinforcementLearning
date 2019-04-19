@@ -26,6 +26,7 @@ def startup():
     pac.reward(grid)
     pac.move(6,3,grid)
     pac.reward(grid)
+    pac.smartMove(grid)
     PacPlots.plot_all(grid, ghost, pac, "endplot")
     
 

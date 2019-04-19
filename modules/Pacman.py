@@ -31,6 +31,37 @@ class Pacman:
         self.move(final_x, final_y, grid)
         return
     
+    def smartMove(self,grid):
+        weights = self.getRewards(grid, 1, 10)
+        greatest_i = 0
+        for i in range(len(weights)):
+            if(weights[greatest_i]<weights[i]):
+                greatest_i = i
+        final_x = self.pos_x+self.neighbors[i][0]
+        final_y = self.pos_y+self.neighbors[i][1]
+        for i in range(len(weights)):
+            print("my weight at " + str(i) + " is " + str(weights[i]) + "!")
+        self.move(final_x,final_y,grid)
+    
+    def getRewards(self, grid, alpha, beta):
+        weights = []
+        for i in range(len(self.neighbors)):
+            consider_x = self.pos_x+self.neighbors[i][0]
+            consider_y = self.pos_y+self.neighbors[i][1]
+            if(consider_x > grid.agent_ID.shape[0]-1) or (consider_x<0):
+                weights.append(-1000)
+                continue
+            if(consider_y > grid.agent_ID.shape[1]-1) or (consider_y<0):
+                weights.append(-1000)
+                continue
+            punishmentContrib = self.punishmentAt(grid,consider_x,consider_y)
+            rewardContrib = self.rewardAt(grid,consider_x,consider_y)
+            rewardsFinal = alpha*rewardContrib - beta*punishmentContrib
+            if rewardsFinal < -1000:
+                rewardsFinal = -999
+            weights.append(rewardsFinal)
+        return weights
+    
     def eat(self, grid):
         if(grid.pellet_ID[self.pos_x][self.pos_y] == 1):
             grid.pellet_ID[self.pos_x][self.pos_y] = 0
@@ -49,7 +80,13 @@ class Pacman:
     def punishment(self,grid):
         (ghostI, ghostJ) = self.findGhost(grid)
         punishment = (((self.pos_x-ghostI)**2)+((self.pos_y-ghostJ)**2))**(1/2)
-        print(punishment)
+        #print(punishment) #for debugging
+        return(punishment)
+
+    def punishmentAt(self,grid,this_x,this_y):
+        (ghostI, ghostJ) = self.findGhost(grid)
+        punishment = (((this_x-ghostI)**2)+((this_y-ghostJ)**2))**(1/2)
+        #print(punishment) #for debugging
         return(punishment)
     
     def reward(self, grid):
@@ -60,5 +97,16 @@ class Pacman:
                     continue
                 if grid.pellet_ID[i][j] == 1:
                     reward += 1/((((self.pos_x-i)**2)+(self.pos_y-j)**2)**(1/2))
-        print(reward)
+        #print(reward) #for debugging
+        return(reward)
+    
+    def rewardAt(self, grid, this_x, this_y):
+        reward = 0
+        for i in range(grid.ghost_ID.shape[0]):
+            for j in range(grid.ghost_ID.shape[1]):
+                if (i == this_x) and (j == this_y):
+                    continue
+                if grid.pellet_ID[i][j] == 1:
+                    reward += 1/((((this_x-i)**2)+(this_y-j)**2)**(1/2))
+        #print(reward) #for debugging
         return(reward)
