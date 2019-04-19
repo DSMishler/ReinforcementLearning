@@ -42,6 +42,7 @@ class Pacman:
         final_y = self.pos_y+self.neighbors[greatest_i][1]
         for i in range(len(weights)):
             print("my weight at " + str(self.neighbors[i]) + " is " + str(weights[i]) + "!")
+        print("So I choose point" + str(greatest_i))
         self.move(final_x,final_y,grid)
     
     def getRewards(self, grid, alpha, beta):
@@ -90,7 +91,7 @@ class Pacman:
 
     def punishmentAt(self,grid,this_x,this_y):
         (ghostI, ghostJ) = self.findGhost(grid)
-        punishment = (((this_x-ghostI)**2)+((this_y-ghostJ)**2))**(1/2)
+        punishment = 1/(((this_x-ghostI)**2)+((this_y-ghostJ)**2))**(1/2)
         #print(punishment) #for debugging
         return(punishment)
     
